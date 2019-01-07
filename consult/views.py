@@ -49,9 +49,9 @@ def send_email(response):
     email = EmailMessage(
         'LC Ventures 홈페이지 문의내용',
         name + position + group + email_ad + phone + describe + create + file_name,
-        'dgryu@lcventures.co.kr',
-        # ['dgryu@lcventures.co.kr', 'biz@lcventures.co.kr']
-        ['dgryu@lcventures.co.kr']
+        'dgryu@lcventures.kr',
+        ['dgryu@lcventures.kr', 'biz@lcventures.kr']
+        # ['dgryu@lcventures.co.kr']
     )
 
     # Send email depends on file exist
@@ -70,6 +70,16 @@ def send_email(response):
         email.send()
 
 
+def error_email(response):
+    email = EmailMessage(
+        'LC Ventures Consult form page error!',
+        'Error from lcventures.net/consult',
+        'dgryu@lcventures.kr',
+        ['dgryu@lcventures.kr']
+    )
+    email.send()
+
+
 class ConsultViewSet(viewsets.ModelViewSet):
     queryset = Consult.objects.all()
     serializer_class = ConsultSerializer
@@ -77,4 +87,10 @@ class ConsultViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         response = super(ConsultViewSet, self).create(request, *args, **kwargs)
         send_email(response)  # sending mail
+        try:
+            send_email(response)
+        except:
+            error_email(response)
+            print('Send email function error.')
+
         return response
