@@ -2,12 +2,11 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from consult.views import ConsultViewSet
+from api.views import ApiViewSet
 
 router = routers.DefaultRouter()
-router.register('consult', ConsultViewSet)
+router.register(r'', ApiViewSet, basename='inquiry')
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include(router.urls))
+    path('inquiry', include(router.urls))
 ]
