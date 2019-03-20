@@ -9,3 +9,4 @@ venv3.6
 
 */db.sqlite3
 */settings.ini
+*/zappa_settings.json
