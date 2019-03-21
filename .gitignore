@@ -6,7 +6,7 @@
 out
 gen
 venv3.6
-
+venv3.7
 */db.sqlite3
 */settings.ini
 */zappa_settings.json
